@@ -53,9 +53,9 @@ Route::post('/ifttt/v1/triggers/pusher_pressed', function() {
 
     $found = $query->get();
 
-    $result = [];
+    $result = ['data' => []];
     foreach ($found as $event) {
-        $result[] = [
+        $result['data'][] = [
             'created_at' => $event->created_at,
             'latitude' => $event->latitude,
             'longitude' => $event->longitude,
