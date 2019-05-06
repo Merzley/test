@@ -44,7 +44,7 @@ Route::post('/ifttt/v1/triggers/pusher_pressed', function() {
         return new \Illuminate\Http\JsonResponse(
             [
                 'errors' => [
-                    'message' => 'No trigger fields'
+                    ['message' => 'No trigger fields']
                 ]
             ],
             \Illuminate\Http\Response::HTTP_BAD_REQUEST,
