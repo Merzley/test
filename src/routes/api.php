@@ -62,7 +62,9 @@ Route::post('/ifttt/v1/triggers/pusher_pressed', function() {
         ];
     }
 
-    return new \Illuminate\Http\JsonResponse($result);
+    return new \Illuminate\Http\JsonResponse($result, 200, [
+        'content-type' => 'application/json; charset=utf-8'
+    ]);
 })->middleware('auth:api');
 
 Route::get('/ifttt/v1/status', function(Request $request) {
@@ -101,5 +103,7 @@ Route::post('/ifttt/v1/test/setup', function(Request $request) {
         ]
     ];
 
-    return new \Illuminate\Http\JsonResponse($result);
+    return new \Illuminate\Http\JsonResponse($result, 200, [
+        'content-type' => 'application/json; charset=utf-8'
+    ]);
 });
