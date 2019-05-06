@@ -39,6 +39,17 @@ Route::post('/ifttt/v1/triggers/pusher_pressed', function() {
         $query->limit(\Illuminate\Support\Facades\Request::get('limit'));
     }
 
+    if (!\Illuminate\Support\Facades\Request::has('triggerFields.pusher') || \Illuminate\Support\Facades\Request::has('triggerFields.pushed_times'))
+    {
+        return new \Illuminate\Http\JsonResponse(
+            [
+                'errors' => ['No Trigger Fields']
+            ],
+            \Illuminate\Http\Response::HTTP_BAD_REQUEST,
+            ['content-type' => 'application/json; charset=utf-8']
+        );
+    }
+
     if (\Illuminate\Support\Facades\Request::has('triggerFields')) {
         $triggerFields = \Illuminate\Support\Facades\Request::get('triggerFields');
 
