@@ -56,7 +56,7 @@ Route::post('/ifttt/v1/triggers/pusher_pressed', function() {
     $result = ['data' => []];
     foreach ($found as $event) {
         $result['data'][] = [
-            'created_at' => $event->created_at,
+            'created_at' => \Carbon\Carbon::parse($event->created_at)->toIso8601String(),
             'latitude' => $event->latitude,
             'longitude' => $event->longitude,
             'meta' => [
