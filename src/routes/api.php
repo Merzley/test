@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/ifttt/v1/user/info', function (Request $request) {
-    if (!\Illuminate\Support\Facades\Auth::check()) {
+    if (!\Illuminate\Support\Facades\Auth::guard('api')->check()) {
         return new \Illuminate\Http\JsonResponse(
             [
                 'errors' => [
@@ -41,7 +41,7 @@ Route::get('/ifttt/v1/user/info', function (Request $request) {
 });
 
 Route::post('/ifttt/v1/triggers/pusher_pressed', function() {
-    if (!\Illuminate\Support\Facades\Auth::check()) {
+    if (!\Illuminate\Support\Facades\Auth::guard('api')->check()) {
         return new \Illuminate\Http\JsonResponse(
             [
                 'errors' => [
