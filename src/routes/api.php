@@ -43,7 +43,7 @@ Route::post('/ifttt/v1/triggers/pusher_pressed', function() {
     {
         return new \Illuminate\Http\JsonResponse(
             [
-                'errors' => ['There was something wrong with incoming data from IFTTT. Provide an error response body to clarify what went wrong.']
+                'errors' => 'There was something wrong with incoming data from IFTTT. Provide an error response body to clarify what went wrong.'
             ],
             \Illuminate\Http\Response::HTTP_BAD_REQUEST,
             ['content-type' => 'application/json; charset=utf-8']
