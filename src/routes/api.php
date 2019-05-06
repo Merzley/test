@@ -65,16 +65,22 @@ Route::post('/ifttt/v1/triggers/pusher_pressed', function() {
     return new \Illuminate\Http\JsonResponse($result);
 })->middleware('auth:api');
 
-Route::get('/ifttt/v1/status', function() {
+Route::get('/ifttt/v1/status', function(Request $request) {
+    if (!$request->hasHeader('IFTTT-Service-Key'))
+        throw new \Symfony\Component\HttpKernel\Exception\HttpException( \Illuminate\Http\Response::HTTP_UNAUTHORIZED);
+
+    if ($request->header('IFTTT-Service-Key') != 'AguL3NPalkSilfha_oaat5y8hXI1Mgc6ranb5ROtXfNRzfUrRAaOcI2b67kmWO9z') //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        throw new \Symfony\Component\HttpKernel\Exception\HttpException( \Illuminate\Http\Response::HTTP_UNAUTHORIZED);
+
     return '';
 });
 
-Route::post('/ifttt/v1/test/setup', function(Request $request) {
+Route::get('/ifttt/v1/test/setup', function(Request $request) {
     if (!$request->hasHeader('IFTTT-Service-Key'))
-        throw new \Symfony\Component\HttpKernel\Exception\HttpException( \Illuminate\Http\Response::HTTP_FORBIDDEN);
+        throw new \Symfony\Component\HttpKernel\Exception\HttpException( \Illuminate\Http\Response::HTTP_UNAUTHORIZED);
 
-    if ($request->header('IFTTT-Service-Key') != 'SOME_SERVICE_KEY') //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        throw new \Symfony\Component\HttpKernel\Exception\HttpException( \Illuminate\Http\Response::HTTP_FORBIDDEN);
+    if ($request->header('IFTTT-Service-Key') != 'AguL3NPalkSilfha_oaat5y8hXI1Mgc6ranb5ROtXfNRzfUrRAaOcI2b67kmWO9z') //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        throw new \Symfony\Component\HttpKernel\Exception\HttpException( \Illuminate\Http\Response::HTTP_UNAUTHORIZED);
 
     $user = \App\User::find(1);
 
