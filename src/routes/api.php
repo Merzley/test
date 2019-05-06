@@ -21,6 +21,10 @@ Route::get('/ifttt/v1/user/info', function (Request $request) {
             'name' => $user->name,
             'id' => strval($user->id)
         ]
+    ],
+    200,
+    [
+        'content-type' => 'application/json; charset=utf-8'
     ]);
 })->middleware('auth:api');
 
