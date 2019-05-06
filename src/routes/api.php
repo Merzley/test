@@ -17,8 +17,10 @@ Route::get('/ifttt/v1/user/info', function (Request $request) {
     $user = \Illuminate\Support\Facades\Auth::guard('api')->user();
 
     return new \Illuminate\Http\JsonResponse([
-        'name' => $user->name,
-        'id' => $user->id
+        'data' => [
+            'name' => $user->name,
+            'id' => $user->id
+        ]
     ]);
 })->middleware('auth:api');
 
