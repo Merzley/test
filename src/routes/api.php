@@ -75,7 +75,7 @@ Route::get('/ifttt/v1/status', function(Request $request) {
     return '';
 });
 
-Route::get('/ifttt/v1/test/setup', function(Request $request) {
+Route::post('/ifttt/v1/test/setup', function(Request $request) {
     if (!$request->hasHeader('IFTTT-Service-Key'))
         throw new \Symfony\Component\HttpKernel\Exception\HttpException( \Illuminate\Http\Response::HTTP_UNAUTHORIZED);
 
