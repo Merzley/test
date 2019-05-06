@@ -14,6 +14,18 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/ifttt/v1/user/info', function (Request $request) {
+    if (!\Illuminate\Support\Facades\Auth::check()) {
+        return new \Illuminate\Http\JsonResponse(
+            [
+                'errors' => [
+                    ['message' => 'Unauthorized']
+                ]
+            ],
+            \Illuminate\Http\Response::HTTP_UNAUTHORIZED,
+            ['content-type' => 'application/json; charset=utf-8']
+        );
+    }
+
     $user = \Illuminate\Support\Facades\Auth::guard('api')->user();
 
     return new \Illuminate\Http\JsonResponse([
@@ -26,9 +38,21 @@ Route::get('/ifttt/v1/user/info', function (Request $request) {
     [
         'content-type' => 'application/json; charset=utf-8'
     ]);
-})->middleware('auth:api');
+});
 
 Route::post('/ifttt/v1/triggers/pusher_pressed', function() {
+    if (!\Illuminate\Support\Facades\Auth::check()) {
+        return new \Illuminate\Http\JsonResponse(
+            [
+                'errors' => [
+                    ['message' => 'Unauthorized']
+                ]
+            ],
+            \Illuminate\Http\Response::HTTP_UNAUTHORIZED,
+            ['content-type' => 'application/json; charset=utf-8']
+        );
+    }
+
     $user = \Illuminate\Support\Facades\Auth::guard('api')->user();
 
     $query = \Illuminate\Support\Facades\DB::table('push_events')
@@ -82,7 +106,7 @@ Route::post('/ifttt/v1/triggers/pusher_pressed', function() {
     return new \Illuminate\Http\JsonResponse($result, 200, [
         'content-type' => 'application/json; charset=utf-8'
     ]);
-})->middleware('auth:api');
+});
 
 Route::get('/ifttt/v1/status', function(Request $request) {
     if (!$request->hasHeader('IFTTT-Service-Key'))
