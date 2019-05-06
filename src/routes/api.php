@@ -100,12 +100,27 @@ Route::post('/ifttt/v1/test/setup', function(Request $request) {
                 'triggers' => [
                     'pusher_pressed' => [
                         'pusher' => '2_O_CLOCK',
-                        'pushed_times' => '3'
+                        'pushed_times' => '3345'
                     ]
                 ]
             ]
         ]
     ];
+
+    $newData = [
+        'user_id' => 1,
+        'pusher' => '2_O_CLOCK',
+        'pushed_times' => '3345',
+    ];
+
+    $newData['created_at'] = new \Carbon\Carbon();
+    \Illuminate\Support\Facades\DB::table('push_events')->insert($newData);
+
+    $newData['created_at'] = new \Carbon\Carbon();
+    \Illuminate\Support\Facades\DB::table('push_events')->insert($newData);
+
+    $newData['created_at'] = new \Carbon\Carbon();
+    \Illuminate\Support\Facades\DB::table('push_events')->insert($newData);
 
     return new \Illuminate\Http\JsonResponse($result, 200, [
         'content-type' => 'application/json; charset=utf-8'
