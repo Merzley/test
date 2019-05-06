@@ -39,11 +39,11 @@ Route::post('/ifttt/v1/triggers/pusher_pressed', function() {
         $query->limit(\Illuminate\Support\Facades\Request::get('limit'));
     }
 
-    if (!\Illuminate\Support\Facades\Request::has('triggerFields.pusher') || \Illuminate\Support\Facades\Request::has('triggerFields.pushed_times'))
+    if (!\Illuminate\Support\Facades\Request::has('triggerFields.pusher') || !\Illuminate\Support\Facades\Request::has('triggerFields.pushed_times'))
     {
         return new \Illuminate\Http\JsonResponse(
             [
-                'errors' => ['No Trigger Fields']
+                'errors' => ['There was something wrong with incoming data from IFTTT. Provide an error response body to clarify what went wrong.']
             ],
             \Illuminate\Http\Response::HTTP_BAD_REQUEST,
             ['content-type' => 'application/json; charset=utf-8']
